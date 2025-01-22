@@ -6,7 +6,13 @@ export default function BtnHomeNav(props) {
     <View style={styles.vwNavGroup}>
       <TouchableOpacity
         style={styles.touchOpNav}
-        onPress={() => props.navigation.navigate(props.goTo)}
+        onPress={() =>
+          props.navigation.navigate(props.goTo, {
+            modalRadius: props.modalRadius,
+            // navigation: props.navigation,
+            demoOption: props.demoOption,
+          })
+        }
       >
         <Text style={styles.txtTouchOpNav}>{props.title}</Text>
       </TouchableOpacity>
