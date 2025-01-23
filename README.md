@@ -2,15 +2,7 @@
 
 ## Description
 
-React native mobile app testing template. Set up with navigation to access different screens in screens/.
-
-## Environment Variables
-
-- store in: .env.local
-
-```env
-EXPO_PUBLIC_API_URL=http://192.168.1.193:3000
-```
+Swipe pad prototype. See [link to confluence](https://kybervision.atlassian.net/wiki/spaces/KV/pages/21921793/2025-01-23+Swipe+Pav+Demo+Version+02).
 
 ## Installations
 
