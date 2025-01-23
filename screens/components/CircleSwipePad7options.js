@@ -65,6 +65,7 @@ export default function CircleSwipePad7options(props) {
     console.log("-- new swipe ---");
     console.log(`x:${x}, y:${y}`);
 
+    // const outerCircleTopBoundary = outerCircleAdder / 2;
     const distance = Math.sqrt(
       Math.pow(x - (props.circleRadius + outerCircleAdder / 2), 2) +
         Math.pow(y - (props.circleRadius + outerCircleAdder / 2), 2)
@@ -75,7 +76,6 @@ export default function CircleSwipePad7options(props) {
       console.log("Swipe ended inside the inner circle.");
       props.setActionList([]);
       props.setModalVisible(false);
-
       return;
     }
 
@@ -92,18 +92,18 @@ export default function CircleSwipePad7options(props) {
       if (translationY > 0) {
         console.log("swipe down");
         handleSwipeColorChange("bottom");
-        // if (y > outerCircleBottomBoundary) {
-        //   handleSwipeColorChange("outerBottom");
-        // }
+        if (y > props.circleRadius * 2 + outerCircleAdder / 2) {
+          handleSwipeColorChange("outerBottom");
+        }
       } else {
         console.log("swipe up");
         if (translationX < 0 && x > y) {
           handleSwipeColorChange("topLeft");
-          //   if (y < outerCircleTopBoundary) {
-          //     handleSwipeColorChange("outerTop");
-          //   }
         } else if (translationX > 0) {
           handleSwipeColorChange("topRight");
+          if (y < outerCircleAdder / 2) {
+            handleSwipeColorChange("outerTop");
+          }
         }
       }
     }
@@ -148,7 +148,6 @@ export default function CircleSwipePad7options(props) {
   const styleRightTriangle = {
     position: "absolute",
     top: props.circleRadius - innerCircleRadius,
-    // left: props.circleRadius,
     left: props.circleRadius + (props.circleRadius * (Math.sqrt(2) - 1)) / 2, // <--- Key Algo: This places the corner of a rotated in the middle of the parent square.
     backgroundColor: swipeColorDict["right"],
     transform: [{ rotate: "45deg" }],
@@ -168,11 +167,79 @@ export default function CircleSwipePad7options(props) {
     backgroundColor: swipeColorDict["left"],
     transform: [{ rotate: "45deg" }],
   };
+
+  const styleOuterTopRectangle = {
+    position: "absolute",
+    top: -(props.circleRadius + outerCircleAdder / 2),
+    left: props.circleRadius + outerCircleAdder / 2,
+    // top: (props.circleRadius + outerCircleAdder) * (Math.sqrt(2) - 1),
+    // left: (props.circleRadius + outerCircleAdder / 2) * (Math.sqrt(2) - 1),
+    height: (props.circleRadius + outerCircleAdder / 2) * 2,
+    width: (props.circleRadius + outerCircleAdder / 2) * 2,
+
+    // width: 0,
+    // height: 0,
+    // backgroundColor: "transparent",
+    // borderStyle: "solid",
+    // borderLeftWidth: props.circleRadius + outerCircleAdder / 4,
+    // borderRightWidth: props.circleRadius + outerCircleAdder / 4,
+    // borderBottomWidth: (props.circleRadius + outerCircleAdder / 2) * 2,
+    // borderLeftColor: "transparent",
+    // borderRightColor: "transparent",
+    // borderBottomColor: swipeColorDict["outerTop"],
+
+    // transform: [{ rotate: "-120deg" }],
+    transform: [{ rotate: "-180deg" }],
+    backgroundColor: swipeColorDict["outerTop"],
+  };
+  const styleRightTriangleHideOuterTopBottom = {
+    position: "absolute",
+    top: 40,
+    left:
+      props.circleRadius +
+      props.circleRadius * (Math.sqrt(2) - 1) +
+      outerCircleAdder -
+      40, // <--- Key Algo: T
+    backgroundColor: "white",
+    transform: [{ rotate: "45deg" }],
+  };
+  const styleOuterBottomTriangle = {
+    position: "absolute",
+    top: props.circleRadius + outerCircleAdder / 2 + props.circleRadius / 2,
+    left:
+      props.circleRadius +
+      outerCircleAdder / 2 -
+      props.circleRadius -
+      innerCircleRadius,
+    // top: props.circleRadius + (props.circleRadius * (Math.sqrt(2) - 1)) / 2,
+    // left: props.circleRadius - innerCircleRadius,
+    transform: [{ rotate: "45deg" }],
+    backgroundColor: swipeColorDict["outerBottom"],
+    // backgroundColor: "red",
+    height: (props.circleRadius + outerCircleAdder / 2) * 2,
+    width: (props.circleRadius + outerCircleAdder / 2) * 2,
+  };
+
   return (
     <GestureHandlerRootView style={{ backgroundColor: "transparent" }}>
       {/* <GestureHandlerRootView> */}
       <GestureDetector gesture={gestureSwipeScripting}>
         <View style={styleOuterCircle}>
+          <View style={styleOuterBottomTriangle} />
+          <View style={styleOuterTopRectangle} />
+          <Svg
+            height={`${props.circleRadius + outerCircleAdder}`}
+            width={`${props.circleRadius + outerCircleAdder}`}
+            style={styleRightTriangleHideOuterTopBottom}
+          >
+            <Polygon
+              points={`0,0 0,${props.circleRadius + outerCircleAdder} ${
+                props.circleRadius + outerCircleAdder
+              },${props.circleRadius + outerCircleAdder}`}
+              fill={"white"}
+            />
+          </Svg>
+
           <View style={styleVwMain}>
             <Svg
               height={`${props.circleRadius}`}

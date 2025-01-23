@@ -7,6 +7,7 @@ import {
   Animated,
   Pressable,
   Text,
+  Platform,
 } from "react-native";
 import { useRef, useState } from "react";
 
@@ -77,7 +78,9 @@ const styles = StyleSheet.create({
     // backgroundColor: "#fff",
   },
   // ----- TOP Container -----
-  containerTop: {},
+  containerTop: {
+    paddingTop: Platform.OS === "android" ? 40 : 0,
+  },
 
   // ------ Bottom -------
   containerBottom: {

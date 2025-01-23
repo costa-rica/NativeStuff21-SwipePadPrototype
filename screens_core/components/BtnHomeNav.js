@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   touchOpNav: {
     backgroundColor: "black",
     padding: 5,
-    width: 250,
+    width: 280,
     borderRadius: 12,
     marginBottom: 1,
   },

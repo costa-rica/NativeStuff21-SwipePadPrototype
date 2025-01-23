@@ -92,6 +92,7 @@ export default function Home({ navigation }) {
 
         <View style={styles.vwSlider}>
           <Text style={styles.txtLabel}>Adjust Radius: {modalRadius}</Text>
+          <Text style={styles.txtLabel}>outerCircle adder: {100}</Text>
           <Slider
             style={{ width: 300, height: 40 }}
             minimumValue={50}
@@ -107,7 +108,7 @@ export default function Home({ navigation }) {
         <View style={{ padding: 20 }}>
           <BtnHomNav
             goTo={"GestureScreen08"}
-            title={"Go to Touch Pad Screen"}
+            title={"Go to Touch Pad Screen ➡️"}
             // description={"use location to display swipe pad"}
             navigation={navigation}
             modalRadius={modalRadius}
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
   txtLabel: {
     fontSize: 18,
     color: "#fff",
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });
 
