@@ -75,6 +75,7 @@ export default function CircleSwipePad7options(props) {
     if (distance <= innerCircleRadius) {
       console.log("Swipe ended inside the inner circle.");
       props.setActionList([]);
+      !props.inGestureScreen && props.setDemoOption(0);
       props.setModalVisible(false);
       return;
     }

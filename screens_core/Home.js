@@ -34,8 +34,17 @@ export default function Home({ navigation }) {
         <View style={styles.vwTitle}>
           <Text style={styles.txtTitle}>Swipe Pad Demo</Text>
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text> Choose type:</Text>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 5,
+            width: Dimensions.get("window").width * 0.9,
+            // backgroundColor: "green",
+          }}
+        >
+          <Text style={{ fontSize: 20 }}> Choose type:</Text>
 
           <ButtonKv
             colorBackground={"blue"}
@@ -63,12 +72,27 @@ export default function Home({ navigation }) {
           </ButtonKv>
         </View>
         <View style={styles.vwSwipePad}>
+          {demoOption == 0 && (
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 20,
+              }}
+            >
+              <Text style={{ fontSize: 30 }}>☝️</Text>
+              <Text style={{ fontSize: 20 }}>
+                Select a type: 2, 5, 0r 7 to show a Swipe Pad
+              </Text>
+            </View>
+          )}
           {demoOption == 2 && (
             <CircleSwipePad2options
               circleRadius={modalRadius}
               setModalVisible={setModalVisible}
               setActionList={setActionList}
               actionList={actionList}
+              setDemoOption={setDemoOption}
             />
           )}
           {demoOption == 5 && (
@@ -77,6 +101,7 @@ export default function Home({ navigation }) {
               setModalVisible={setModalVisible}
               setActionList={setActionList}
               actionList={actionList}
+              setDemoOption={setDemoOption}
             />
           )}
           {demoOption == 7 && (
@@ -86,6 +111,7 @@ export default function Home({ navigation }) {
               setActionList={setActionList}
               actionList={actionList}
               outerCircleAdder={100}
+              setDemoOption={setDemoOption}
             />
           )}
         </View>
@@ -106,14 +132,18 @@ export default function Home({ navigation }) {
           />
         </View>
         <View style={{ padding: 20 }}>
-          <BtnHomNav
-            goTo={"GestureScreen08"}
-            title={"Go to Touch Pad Screen ➡️"}
-            // description={"use location to display swipe pad"}
-            navigation={navigation}
-            modalRadius={modalRadius}
-            demoOption={demoOption}
-          />
+          {demoOption != 0 ? (
+            <BtnHomNav
+              goTo={"GestureScreen08"}
+              title={"Go to Touch Pad Screen ➡️"}
+              // description={"use location to display swipe pad"}
+              navigation={navigation}
+              modalRadius={modalRadius}
+              demoOption={demoOption}
+            />
+          ) : (
+            <Text style={{ fontSize: 20 }}>Select a type</Text>
+          )}
         </View>
       </View>
     </SafeAreaView>

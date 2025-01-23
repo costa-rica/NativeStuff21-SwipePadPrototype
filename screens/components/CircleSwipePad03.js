@@ -73,6 +73,7 @@ export default function CircleSwipePad03(props) {
       console.log("Swipe ended inside the inner circle.");
       //   console.log(`actionsList: ${props.actionList.length}`);
       props.setActionList([]);
+      !props.inGestureScreen && props.setDemoOption(0);
       props.setModalVisible(false);
       //   console.log(`actionsList: ${props.actionList.length}`);
       return;

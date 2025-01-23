@@ -96,6 +96,7 @@ export default function GestureScreen08({ route, navigation }) {
                     setModalVisible={setModalVisible}
                     setActionList={setActionList}
                     actionList={actionList}
+                    inGestureScreen={true}
                   />
                 )}
                 {demoOption == 5 && (
@@ -104,6 +105,7 @@ export default function GestureScreen08({ route, navigation }) {
                     setModalVisible={setModalVisible}
                     setActionList={setActionList}
                     actionList={actionList}
+                    inGestureScreen={true}
                   />
                 )}
                 {demoOption == 7 && (
@@ -113,6 +115,7 @@ export default function GestureScreen08({ route, navigation }) {
                     setActionList={setActionList}
                     actionList={actionList}
                     outerCircleAdder={outerCircleAdder}
+                    inGestureScreen={true}
                   />
                 )}
               </View>
